@@ -1,0 +1,10 @@
+C:\Users\LUCHO\Documents\Visual Studio 2015\Projects\SuperMercadoLaCanasta\Entidades\bin\Debug\Entidades.dll
+C:\Users\LUCHO\Documents\Visual Studio 2015\Projects\SuperMercadoLaCanasta\Entidades\bin\Debug\Entidades.pdb
+C:\Users\LUCHO\Documents\Visual Studio 2015\Projects\SuperMercadoLaCanasta\Entidades\obj\Debug\Entidades.dll
+C:\Users\LUCHO\Documents\Visual Studio 2015\Projects\SuperMercadoLaCanasta\Entidades\obj\Debug\Entidades.pdb
+C:\Users\OCULTO\Documents\Visual Studio 2015\Projects\La Canasta\SuperMercadoLaCanasta\Entidades\bin\Debug\Entidades.dll
+C:\Users\OCULTO\Documents\Visual Studio 2015\Projects\La Canasta\SuperMercadoLaCanasta\Entidades\bin\Debug\Entidades.pdb
+C:\Users\OCULTO\Documents\Visual Studio 2015\Projects\La Canasta\SuperMercadoLaCanasta\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
+C:\Users\OCULTO\Documents\Visual Studio 2015\Projects\La Canasta\SuperMercadoLaCanasta\Entidades\obj\Debug\Entidades.csproj.CoreCompileInputs.cache
+C:\Users\OCULTO\Documents\Visual Studio 2015\Projects\La Canasta\SuperMercadoLaCanasta\Entidades\obj\Debug\Entidades.dll
+C:\Users\OCULTO\Documents\Visual Studio 2015\Projects\La Canasta\SuperMercadoLaCanasta\Entidades\obj\Debug\Entidades.pdb
