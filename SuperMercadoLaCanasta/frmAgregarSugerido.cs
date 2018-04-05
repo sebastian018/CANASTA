@@ -2,6 +2,8 @@
 using Entidades.SugeridoPedidoSugerido;
 using Entidades.Sugeridos;
 using Entidades.Usuarios;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using Logica.PedidoSugerido;
 using Logica.SugeridoPedidoSugerido;
 using Logica.Sugeridos;
@@ -10,6 +12,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,7 +74,7 @@ namespace SuperMercadoLaCanasta
                     listaSugueridos.Add(sugerido);
 
                     dgvSugeridos.DataSource = null;
-                    dgvSugeridos.DataSource = listaSugueridos; //.OrderBy(s => s.nombreDepartamento)
+                    dgvSugeridos.DataSource = listaSugueridos;
                     mtdRecargarCampos();
                     mtdOcultarColumnas();
                 }
@@ -167,6 +170,15 @@ namespace SuperMercadoLaCanasta
                         lSugeridoPedidoSugerido.mtdInsertarPedidoSugerido(sugeridoPedidoSugerido);
                     }
                     #endregion
+
+                    if (MessageBox.Show("¿Desea guardar PDF?", "La Canasta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                        {
+                            lblRuta.Text = folderBrowserDialog1.SelectedPath;
+                            mtdGenerarPdf(sugeridoPedido[1].ToString());
+                        }
+                    }
 
                     MessageBox.Show("Su pedido se ha generado con número de referencia P0000"+ sugeridoPedido[1].ToString());
                     mtdBlanquearTodo();
@@ -278,6 +290,82 @@ namespace SuperMercadoLaCanasta
                 MessageBox.Show("Solo se permiten números", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 e.Handled = true;
                 return;
+            }
+        }
+
+        private void mtdGenerarPdf(string consecutivo)
+        {
+            try
+            {
+                string fecha = DateTime.Now.ToShortDateString().ToString().Replace("/", "-");
+
+                Document doc = new Document(PageSize.LETTER);
+                PdfWriter writer = PdfWriter.GetInstance(doc,
+                                            new FileStream(lblRuta.Text+"/Sugueridos" + fecha + "_P0000" + consecutivo +".pdf", FileMode.Create));
+                doc.AddTitle("Sugueridos");
+                doc.Open();
+
+                doc.Add(new Paragraph("Mis Sugueridos"));
+                doc.Add(Chunk.NEWLINE);
+
+                PdfPTable tblPrueba = new PdfPTable(5);
+                tblPrueba.WidthPercentage = 100;
+
+                // Configuramos el título de las columnas de la tabla
+                PdfPCell codigoBarras = new PdfPCell(new Phrase("Código de Barras"));
+                codigoBarras.BorderWidth = 0.45f;
+
+                PdfPCell producto = new PdfPCell(new Phrase("Producto"));
+                producto.BorderWidth = 0.45f;
+
+                PdfPCell cantidad = new PdfPCell(new Phrase("Cantidad"));
+                cantidad.BorderWidth = 0.45f;
+
+                PdfPCell embalage = new PdfPCell(new Phrase("Embalage"));
+                embalage.BorderWidth = 0.45f;
+
+                PdfPCell departamento = new PdfPCell(new Phrase("Departamento"));
+                departamento.BorderWidth = 0.45f;
+
+                // Añadimos las celdas a la tabla
+                tblPrueba.AddCell(producto);
+                tblPrueba.AddCell(cantidad);
+                tblPrueba.AddCell(embalage);
+                tblPrueba.AddCell(departamento);
+                tblPrueba.AddCell(codigoBarras);
+
+                foreach (DataGridViewRow row in dgvSugeridos.Rows)
+                {
+                    // Llenamos la tabla con información
+                    codigoBarras = new PdfPCell(new Phrase(row.Cells[1].Value.ToString()));
+                    codigoBarras.BorderWidth = 0.45f;
+
+                    producto = new PdfPCell(new Phrase(row.Cells[2].Value.ToString()));
+                    producto.BorderWidth = 0.45f;
+
+                    cantidad = new PdfPCell(new Phrase(row.Cells[3].Value.ToString()));
+                    cantidad.BorderWidth = 0.45f;
+
+                    embalage = new PdfPCell(new Phrase(row.Cells[4].Value.ToString()));
+                    embalage.BorderWidth = 0.45f;
+
+                    departamento = new PdfPCell(new Phrase(row.Cells[7].Value.ToString()));
+                    departamento.BorderWidth = 0.45f;
+
+                    // Añadimos las celdas a la tabla
+                    tblPrueba.AddCell(producto);
+                    tblPrueba.AddCell(cantidad);
+                    tblPrueba.AddCell(embalage);
+                    tblPrueba.AddCell(departamento);
+                    tblPrueba.AddCell(codigoBarras);
+                }
+
+                doc.Add(tblPrueba);
+                doc.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al imprimir sugeridos: " + ex.Message);
             }
         }
     }

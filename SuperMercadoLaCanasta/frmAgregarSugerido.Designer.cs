@@ -47,12 +47,15 @@
             this.txtFecha = new System.Windows.Forms.TextBox();
             this.lblFecha = new System.Windows.Forms.Label();
             this.lblSugeridos = new System.Windows.Forms.Label();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.lblRuta = new System.Windows.Forms.Label();
             this.panelPrincipal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSugeridos)).BeginInit();
             this.SuspendLayout();
             // 
             // panelPrincipal
             // 
+            this.panelPrincipal.Controls.Add(this.lblRuta);
             this.panelPrincipal.Controls.Add(this.btnGuardar);
             this.panelPrincipal.Controls.Add(this.lblUsuario);
             this.panelPrincipal.Controls.Add(this.lblIdDepartamento);
@@ -241,6 +244,15 @@
             this.lblSugeridos.TabIndex = 0;
             this.lblSugeridos.Text = "Ingreso de Sugeridos";
             // 
+            // lblRuta
+            // 
+            this.lblRuta.AutoSize = true;
+            this.lblRuta.Location = new System.Drawing.Point(247, 451);
+            this.lblRuta.Name = "lblRuta";
+            this.lblRuta.Size = new System.Drawing.Size(0, 13);
+            this.lblRuta.TabIndex = 18;
+            this.lblRuta.Visible = false;
+            // 
             // frmAgregarSugerido
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,5 +290,7 @@
         private System.Windows.Forms.Label lblIdDepartamento;
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.Label lblRuta;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
