@@ -74,6 +74,7 @@ namespace SuperMercadoLaCanasta
                     listaSugueridos.Add(sugerido);
 
                     dgvSugeridos.DataSource = null;
+                    listaSugueridos = listaSugueridos.OrderBy(s => s.nombreDepartamento).ToList();
                     dgvSugeridos.DataSource = listaSugueridos;
                     mtdRecargarCampos();
                     mtdOcultarColumnas();
