@@ -34,24 +34,8 @@ namespace SuperMercadoLaCanasta
             {
                 lObjPedidoSugerido = new LClPedidoSugerido();
 
-                if (rbtnConsecutivo.Checked)
-                {
-                    if (txtNumeroPedido.Text != "")
-                    {
-                        gvdSugeridos.DataSource = lObjPedidoSugerido.mtdListarPedidoSugeridoPorConsecutivo(txtNumeroPedido.Text);
-                        mtdOcultarColumnas();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Ingrese número de pedido");
-                    }
-                }
-
-                if (rbtnFechas.Checked)
-                {
-                    gvdSugeridos.DataSource = lObjPedidoSugerido.mtdListarPedidoSugeridoPorFechas(DateTime.Parse(txtFechaInicial.Text),DateTime.Parse(txtFechaFinal.Text));
-                    mtdOcultarColumnas();
-                }
+                mtdListarPorConsecutivo();
+                mtdListarPorFechas();
             }
             catch (Exception ex)
             {
@@ -111,6 +95,7 @@ namespace SuperMercadoLaCanasta
 
                 txtId.Text = gvdSugeridos[0, poc].Value.ToString();
                 btnVer.Visible = true;
+                btnEliminar.Visible = true;
             }
             catch (Exception ex)
             {
@@ -124,6 +109,76 @@ namespace SuperMercadoLaCanasta
             {
                 new FrmVerSugerido(int.Parse(txtId.Text)).Show();
                 this.Hide();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("¿Esta seguro que desea eliminar este pedido?", "La Canasta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    EclPedidoSugerido pedidoSugerido = new EclPedidoSugerido();
+                    pedidoSugerido.idPedidoSugerido = int.Parse(txtId.Text);
+                    pedidoSugerido.estado = "Inactivo";
+
+                    int result = lObjPedidoSugerido.mtdEliminarPedidoSugerido(pedidoSugerido);
+
+                    if (result == 1)
+                    {
+                        mtdListarPorConsecutivo();
+                        mtdListarPorFechas();
+
+                        MessageBox.Show("Pedido eliminado correctamente");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al eliminar pedido");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void mtdListarPorConsecutivo()
+        {
+            try
+            {
+                if (rbtnConsecutivo.Checked)
+                {
+                    if (txtNumeroPedido.Text != "")
+                    {
+                        gvdSugeridos.DataSource = lObjPedidoSugerido.mtdListarPedidoSugeridoPorConsecutivo(txtNumeroPedido.Text);
+                        mtdOcultarColumnas();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ingrese número de pedido");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void mtdListarPorFechas()
+        {
+            try
+            {
+                if (rbtnFechas.Checked)
+                {
+                    gvdSugeridos.DataSource = lObjPedidoSugerido.mtdListarPedidoSugeridoPorFechas(DateTime.Parse(txtFechaInicial.Text), DateTime.Parse(txtFechaFinal.Text));
+                    mtdOcultarColumnas();
+                }
             }
             catch (Exception ex)
             {

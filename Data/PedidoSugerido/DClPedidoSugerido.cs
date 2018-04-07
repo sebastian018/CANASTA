@@ -170,5 +170,24 @@ namespace Data.PedidoSugerido
 
             return pedido;
         }
+
+        public int mtdEliminarPedidoSugerido(EclPedidoSugerido pedidoSugerido)
+        {
+            int resultado = 0;
+
+            try
+            {
+                string consulta = string.Format(@"UPDATE PEDIDO_SUGERIDO SET estado = '{0}' WHERE idPedidoSugerido = {1}",
+                    pedidoSugerido.estado, pedidoSugerido.idPedidoSugerido);
+
+                resultado = transaccion.mtdInsertar(consulta);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al insertar sugeridos: " + ex.Message);
+            }
+
+            return resultado;
+        }
     }
 }

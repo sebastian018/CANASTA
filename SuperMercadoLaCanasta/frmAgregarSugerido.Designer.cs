@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panelPrincipal = new System.Windows.Forms.Panel();
+            this.lblRuta = new System.Windows.Forms.Label();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.lblIdDepartamento = new System.Windows.Forms.Label();
@@ -48,7 +49,6 @@
             this.lblFecha = new System.Windows.Forms.Label();
             this.lblSugeridos = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.lblRuta = new System.Windows.Forms.Label();
             this.panelPrincipal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSugeridos)).BeginInit();
             this.SuspendLayout();
@@ -78,6 +78,15 @@
             this.panelPrincipal.Name = "panelPrincipal";
             this.panelPrincipal.Size = new System.Drawing.Size(906, 482);
             this.panelPrincipal.TabIndex = 0;
+            // 
+            // lblRuta
+            // 
+            this.lblRuta.AutoSize = true;
+            this.lblRuta.Location = new System.Drawing.Point(247, 451);
+            this.lblRuta.Name = "lblRuta";
+            this.lblRuta.Size = new System.Drawing.Size(0, 13);
+            this.lblRuta.TabIndex = 18;
+            this.lblRuta.Visible = false;
             // 
             // btnGuardar
             // 
@@ -153,6 +162,7 @@
             // 
             this.txtCantidad.Enabled = false;
             this.txtCantidad.Location = new System.Drawing.Point(393, 80);
+            this.txtCantidad.MaxLength = 5;
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(161, 20);
             this.txtCantidad.TabIndex = 10;
@@ -243,15 +253,6 @@
             this.lblSugeridos.Size = new System.Drawing.Size(107, 13);
             this.lblSugeridos.TabIndex = 0;
             this.lblSugeridos.Text = "Ingreso de Sugeridos";
-            // 
-            // lblRuta
-            // 
-            this.lblRuta.AutoSize = true;
-            this.lblRuta.Location = new System.Drawing.Point(247, 451);
-            this.lblRuta.Name = "lblRuta";
-            this.lblRuta.Size = new System.Drawing.Size(0, 13);
-            this.lblRuta.TabIndex = 18;
-            this.lblRuta.Visible = false;
             // 
             // frmAgregarSugerido
             // 

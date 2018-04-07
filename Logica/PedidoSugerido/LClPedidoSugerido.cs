@@ -23,5 +23,8 @@ namespace Logica.PedidoSugerido
 
         public EclPedidoSugerido mtdListarPedidoSugeridoPorId(int id)
             => objDPedidoSugerido.mtdListarPedidoSugeridoPorId(id);
+
+        public int mtdEliminarPedidoSugerido(EclPedidoSugerido pedidoSugerido)
+            => objDPedidoSugerido.mtdEliminarPedidoSugerido(pedidoSugerido);
     }
 }
